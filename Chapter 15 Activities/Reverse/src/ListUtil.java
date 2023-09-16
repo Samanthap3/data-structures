@@ -14,7 +14,6 @@ public class ListUtil
     public static void reverse(LinkedList<String> strings)
     {
         
-        ListIterator<String> endIterator = strings.listIterator(strings.size());
 
         int end = strings.size()-1;//position one less so it is the size after first is removed
         while(end != 0)
@@ -25,9 +24,6 @@ public class ListUtil
             startIterator = strings.listIterator(end); //HRT|
             startIterator.add(current);//HRTD
             end--;
-                    System.out.print("hi");
-
-
         }
 
 
@@ -47,6 +43,8 @@ public class ListUtil
            }
         }*
         System.out.print(strings);
+            ListIterator<String> endIterator = strings.listIterator(strings.size());
+
             while(!endIterator.hasNext() && count<end)
             {
                 count++;
