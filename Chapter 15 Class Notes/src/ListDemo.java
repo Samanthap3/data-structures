@@ -54,7 +54,7 @@ public class ListDemo
         iterator.previous(); // DHJ|NT
         iterator.set("Albert"); //DHJ|AT
 
-        /* The ansNext method returns true if the list has another element.
+        /* The hnsNext method returns true if the list has another element.
          * It is often used in the condition of the while loop.
          */
         iterator = staff.listIterator(); // DHJAT
