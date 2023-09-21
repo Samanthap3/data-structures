@@ -13,8 +13,6 @@ public class ListUtil
     */
     public static void reverse(LinkedList<String> strings)
     {
-        
-
         int end = strings.size()-1;//position one less so it is the size after first is removed
         while(end != 0)
         {
@@ -43,15 +41,21 @@ public class ListUtil
            }
         }*
         System.out.print(strings);
-            ListIterator<String> endIterator = strings.listIterator(strings.size());
+        int count = 0;
+        int end = strings.size();
+        
 
+            ListIterator<String> endIterator = strings.listIterator(strings.size());
+            
             while(!endIterator.hasNext() && count<end)
             {
                 count++;
                 String current = endIterator.previous();
-                endIterator.remove();//stops working at this line
-                startIterator.add(current);
-                System.out.print(count);
+                endIterator.remove();
+                ListIterator<String> startIterator = strings.listIterator();
+                startIterator.next();//concurrent mod error
+                //startIterator.add(current);
+                //System.out.print(count);
                 
             }*/
         
