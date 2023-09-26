@@ -63,15 +63,16 @@ public class SudokuSolver {
         // create the list of sets for each col (this.cols)
         this.cols = new ArrayList<Set<Integer>>();
 
-        for(int col = 0; col < this.grid[0].length; col++)
+        for(int col = 0; col < grid[0].length; col++)
         {
             Set <Integer> currentcol = new HashSet<>();
 
-            for(int row = 0; row < this.grid.length; row++)
+            for(int row = 0; row < grid.length; row++)
             {
                 currentcol.add(this.grid[row][col]);
             }
-            this.rows.add(currentcol);
+            this.cols.add(currentcol);
+            
         }
 
         // create the list of sets for each square (this.squares)
