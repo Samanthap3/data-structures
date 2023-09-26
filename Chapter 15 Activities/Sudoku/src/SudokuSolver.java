@@ -36,16 +36,6 @@ public class SudokuSolver {
         }
 
         // create the list of sets for each row (this.rows)
-        //test the grid printout
-        /*for(int row = 0; row < this.grid.length; row++)
-        {
-
-            for(int col = 0; col < this.grid[0].length; col++)
-            { 
-                System.out.print(grid[row][col]);
-            }
-            System.out.println();
-        }*/
 
         this.rows = new ArrayList<Set<Integer>>();
 
@@ -154,6 +144,35 @@ public class SudokuSolver {
          */
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
+        //for(int r = 0; r < rows.size(); r++)
+        //{
+            Set<Integer> rowNums = rows.get(nextRow);
+            for(int n: rowNums)
+            {
+                //if(possibleNums.contains(n)){
+                    possibleNums.remove(n);
+                //}
+            }
+        //}
+        Set<Integer> colNums = cols.get(nextCol);
+            for(int n: colNums)
+            {
+                //if(possibleNums.contains(n))
+                //{
+                    possibleNums.remove(n);
+                //}
+            }
+        if(nextCol < 3)
+        {
+            Set<Integer> sqNums = squares.get(nextCol);
+            for(int n: sqNums)
+            {
+                //if(possibleNums.contains(n))
+                //{
+                    possibleNums.remove(n);
+                //}
+            }
+        }
         
         // ...
 
