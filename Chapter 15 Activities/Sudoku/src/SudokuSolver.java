@@ -144,37 +144,57 @@ public class SudokuSolver {
          */
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
-        //for(int r = 0; r < rows.size(); r++)
-        //{
+        
             Set<Integer> rowNums = rows.get(nextRow);
             for(int n: rowNums)
             {
-                //if(possibleNums.contains(n)){
-                    possibleNums.remove(n);
-                //}
+                possibleNums.remove(n);
             }
-        //}
-        Set<Integer> colNums = cols.get(nextCol);
+
+            Set<Integer> colNums = cols.get(nextCol);
             for(int n: colNums)
             {
-                //if(possibleNums.contains(n))
-                //{
-                    possibleNums.remove(n);
-                //}
+                possibleNums.remove(n);
             }
-        if(nextCol < 3)
+
+        int rSquare = nextRow/3;
+        int cSquare = nextCol/3;
+        int square = rSquare * 3 + cSquare;
+        Set<Integer> sqNums;
+        // = squares.get(square);
+        if(nextRow < 3)
         {
-            Set<Integer> sqNums = squares.get(nextCol);
-            for(int n: sqNums)
-            {
-                //if(possibleNums.contains(n))
-                //{
-                    possibleNums.remove(n);
-                //}
-            }
+            if(nextCol < 3)
+            {sqNums = squares.get(0);}
+            else if(nextCol < 6)
+            {sqNums = squares.get(1);}
+            else
+            {sqNums = squares.get(2);}
         }
+        else if(nextRow < 6)
+        {
+            if(nextCol < 3)
+            {sqNums = squares.get(3);}
+            else if(nextCol < 6)
+            {sqNums = squares.get(4);}
+            else
+            {sqNums = squares.get(5); }
+        }
+        else
+        {
+            if(nextCol < 3)
+            {sqNums = squares.get(6);}
+            else if(nextCol < 6)
+            {sqNums = squares.get(7);}
+            else
+            {sqNums = squares.get(8); }
+        }
+        for(int n: sqNums)
+            {
+                possibleNums.remove(n);
+            }
+            //System.out.print(possibleNums);
         
-        // ...
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
@@ -182,9 +202,14 @@ public class SudokuSolver {
         }
 
         // try each possible number
-        for (Integer possibleNum : possibleNums) {
+        
+        for (Integer possibleNum : possibleNums) 
+        {
             // update the grid and all three corresponding sets with possibleNum
-            // ...
+            this.grid[nextRow][nextCol] = possibleNum;
+            rows.get(nextRow).add(possibleNum);
+            cols.get(nextCol).add(possibleNum);
+            squares.get(square).add(possibleNum);
 
             // recursively solve the board
             if (this.solve()) {
@@ -196,7 +221,10 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                // ...
+                this.grid[nextRow][nextCol] = 0;
+                rows.get(nextRow).remove(possibleNum);
+                cols.get(nextCol).remove(possibleNum);
+                squares.get(square).remove(possibleNum);
             }
         }
 
