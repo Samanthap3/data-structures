@@ -73,15 +73,15 @@ public class SudokuSolver {
          */
         this.squares = new ArrayList<Set<Integer>>();
         
-        for(int row = 0; row<9; row+=3)//iterates through the 3 rows of squares
+        for(int row = 0; row<9; row+=M)//iterates through the 3 rows of squares
         {
-            for(int col = 0; col < 9; col+=3)//iterates through the 3 columns of squares
+            for(int col = 0; col < 9; col+=M)//iterates through the 3 columns of squares
             {
                 Set <Integer> currentsquare = new HashSet<>();
 
-                for(int r = row; r < row+3; r++)//iterates through 3 rows in the square
+                for(int r = row; r < row+M; r++)//iterates through 3 rows in the square
                 {
-                    for(int c = col; c < col+3; c++)//iterates through 3 columns in the square
+                    for(int c = col; c < col+M; c++)//iterates through 3 columns in the square
                     {
                         currentsquare.add(grid[r][c]);
 
@@ -144,7 +144,11 @@ public class SudokuSolver {
          */
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
-        
+        //possibleNums.removeAll(rows.get(nextRow));
+        //possibleNums.removeAll(cols.get(nextRow));
+        //possibleNums.removeAll(squares.get((nextRow/M)*M+(nextCol/M)));
+
+
             Set<Integer> rowNums = rows.get(nextRow);
             for(int n: rowNums)
             {
@@ -157,38 +161,8 @@ public class SudokuSolver {
                 possibleNums.remove(n);
             }
 
-        int rSquare = nextRow/3;
-        int cSquare = nextCol/3;
-        int square = rSquare * 3 + cSquare;
-        Set<Integer> sqNums;
-        // = squares.get(square);
-        if(nextRow < 3)
-        {
-            if(nextCol < 3)
-            {sqNums = squares.get(0);}
-            else if(nextCol < 6)
-            {sqNums = squares.get(1);}
-            else
-            {sqNums = squares.get(2);}
-        }
-        else if(nextRow < 6)
-        {
-            if(nextCol < 3)
-            {sqNums = squares.get(3);}
-            else if(nextCol < 6)
-            {sqNums = squares.get(4);}
-            else
-            {sqNums = squares.get(5); }
-        }
-        else
-        {
-            if(nextCol < 3)
-            {sqNums = squares.get(6);}
-            else if(nextCol < 6)
-            {sqNums = squares.get(7);}
-            else
-            {sqNums = squares.get(8); }
-        }
+        int square = (nextRow/M) * M + nextCol/M;
+        Set<Integer> sqNums = squares.get(square);
         for(int n: sqNums)
             {
                 possibleNums.remove(n);
