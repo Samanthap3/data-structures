@@ -27,6 +27,8 @@ public class FirstLetterMap
 
                 // Update the map here
                 // Use the Java 8 merge method
+                // c is the key to look up
+                //new TreeSet<>(Arrays.asList(Word))  default
                 firstLetter.merge(c, word, (v1, v2) -> v1 + ", " + v2);
 
             }

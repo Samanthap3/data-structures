@@ -27,20 +27,17 @@ public class StringLengthMap
 
                 // Update the map here
                 
-                    if(wordLength.get(len) != null)
-                    {
-                        wordLength.put(len, wordLength.get(len) + ", "  +word);
-                    }
-                    else
-                    {
-                        wordLength.put(len, word);
-                    }
-                
+                if(wordLength.get(len) != null)
+                {
+                    wordLength.put(len, wordLength.get(len) + ", "  +word);
+                }
+                else
+                {
+                    wordLength.put(len, word);
+                }
                 
                 // Modify Worked Example 15.1
                 
-
-
             }
 
             // Print the strings, in increasing order of their length

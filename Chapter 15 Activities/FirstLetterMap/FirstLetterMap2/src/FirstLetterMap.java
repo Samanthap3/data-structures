@@ -35,6 +35,15 @@ public class FirstLetterMap
                     {
                         firstLetter.put(c, word);
                     }
+                    /*
+                     * Map<Character, String> firstLetter = new TreeMap<>();
+                     * String str = word;
+                     * if(str == null){
+                     * str.word;}
+                     * else{
+                        if(str.indexOf(word) ==-1)
+                        str= str + "," + word;}
+                     */
 
 
             }
