@@ -17,13 +17,38 @@ public class HTMLChecker
 {
     public static void main(String[] args)
     {
-        String filename = "src/TagSample1.html";
+        String filename = "Chapter 15 Activities/HTMLChecker/src/TagSample3.html";
+        Stack<String> tags = new Stack<>();
+        Stack<String> endTags = new Stack<>();
 
         try (Scanner in = new Scanner(new File(filename)))
         {
             // Your code goes here
-            . . .
+            while(in.hasNext())//populate stack
+            {
+                String current = in.next();
+                tags.push(current);
+            }
 
+            while(tags.size() >0)
+            {
+                if(tags.peek().contains("/"))
+                {
+                    endTags.push(tags.pop());//pushes closing tags onto new stack
+                }
+                //compares the letters if the most recent end and start tag match
+                else if(tags.peek().substring(1).equals(endTags.peek().substring(2)))
+                {
+                    tags.pop();
+                    endTags.pop();
+                }
+                else
+                {
+                    System.out.print("Not Proper");
+                    break; 
+                }
+            }
+            
 
         } catch (FileNotFoundException e)
         {
