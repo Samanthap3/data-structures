@@ -5,7 +5,7 @@ public class Grid
     private static final int SIZE = 10;
     int[][] pixels = new int[SIZE][SIZE];
     Stack<pair> spots = new Stack<>();
-
+    
     
     
 
@@ -19,6 +19,23 @@ public class Grid
         //System.out.println(pixels[row][column]);
         //spots.push(new pair(row, column));
         //pixels[row][column] = 1;
+         for (int i = 0; i < SIZE; i++)
+        {
+            for (int j = 0; j < SIZE; j++)
+                pixels[i][j] = 0;
+
+        }
+        spots.push(new pair(row-1, column));
+        spots.push(new pair(row, column+1));
+        
+        spots.push(new pair(row+1, column));
+        spots.push(new pair(row, column-1));
+        
+        
+
+
+         while()
+        
         while(spots.size()<=100){
         
         if(pixels[row][column] == 0)
