@@ -1,11 +1,11 @@
-public class pair
-{
-    int row;
-    int col;
+public class pair {
+    int r;
+    int c;
 
-    public pair(int r, int c) {
-    
-        row = r;
-        col = c;
+    public pair(int row, int col)
+    {
+        
+        r = row;
+        c = col;
     }
 }
