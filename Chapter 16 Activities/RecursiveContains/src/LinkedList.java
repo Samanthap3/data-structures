@@ -53,17 +53,11 @@ public class LinkedList
     {
         if(start == null)
             return false;
-        else{
-            while(start != null) {
-                if(start.data.equals(obj))
-                    return true;
-                else
-                {
-                    start = start.next;
-                }
-            }
-        }
-        return false;
+        if(start.data.equals(obj))
+            return true;
+        
+        return contains(start.next, obj);
+        
     }
 
     /**
