@@ -26,17 +26,24 @@ public class LinkedList
     */
     public int size()
     {
-        System.out.print("hi");
         int count = 0;
-        
-        //newNode = this.first;
-        if(first != null)
-        {
-            Node newNode = first;
-            count++;
-            size();
+        Node newNode = first;
+        while(newNode != null)
+        {    
+            count += size(newNode);
+            newNode = newNode.next;
         }
+
         return count;
+
+    }
+
+    private static int size(Node start)
+    {
+        //int count = 0;
+        //if(start != null)
+            return 1;
+        
     }
 
 
