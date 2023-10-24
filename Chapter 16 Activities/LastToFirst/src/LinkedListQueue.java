@@ -22,13 +22,15 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
-        
-        Node temp = this.head;
-        
-        System.out.println(this.tail.next);
-        this.tail = temp;
-        
-        this.head = temp;
+        LinkedListQueue newQueue = new LinkedListQueue();
+        while(this.head.next != null)
+        {
+            newQueue.add(this.remove());
+        }
+        while(!newQueue.empty())
+        {
+            this.add(newQueue.remove());
+        }
 
     }
 
