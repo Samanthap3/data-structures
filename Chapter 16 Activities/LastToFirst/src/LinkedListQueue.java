@@ -31,7 +31,21 @@ public class LinkedListQueue
         {
             this.add(newQueue.remove());
         }
-
+        /*if (tail != head)
+        {
+            Node check = head.next;
+            tail.next = head;
+            head = tail;
+            while(check != null)
+            {
+                if (check.next == head)
+                {
+                    check.next = null;
+                    tail = check;
+                }
+                check = check.next;
+            }
+        }*/
     }
 
     /**
