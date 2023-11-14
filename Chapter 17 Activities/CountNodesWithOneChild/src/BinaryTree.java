@@ -5,6 +5,7 @@
 public class BinaryTree
 {
     private Node root;
+    private int nodes;
 
     /**
         Constructs an empty tree.
@@ -102,4 +103,39 @@ public class BinaryTree
         result.root = root.right;
         return result;
     }
+
+    public int countNodesWithOneChild()
+    {
+        if (this.root == null) { return 0; }
+        
+        if (this.height() != 1){
+            if ((this.root.left == null && this.root.right != null) || (this.root.left != null && this.root.right == null)){
+                nodes++;
+            }
+            else{
+                if(root.left != null)
+                {
+                    BinaryTree left = new BinaryTree(this.root.left);
+                    left.countNodesWithOneChild();
+                }
+                if(root.right != null)
+                {
+                    BinaryTree right = new BinaryTree(this.root.right);
+                    right.countNodesWithOneChild();
+                }
+            }
+            //if there aree two children and one of the two children has a single child 
+
+        
+        }
+        return nodes;
+    }
 }
+/*
+ * if (rt.root.left == null){
+                    rt.root = rt.root.right;
+                } 
+                else if (rt.root.right == null){
+                    rt.root = rt.root.left;
+                }
+ */
