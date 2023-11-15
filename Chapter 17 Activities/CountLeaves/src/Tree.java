@@ -35,6 +35,7 @@ public class Tree
         root = null;
     }
 
+
     /**
         Constructs a tree with one node and no children.
         @param rootData the data for the root
@@ -67,26 +68,26 @@ public class Tree
     // Additional methods will be added in later sections.
     public int leafCount()
     {
-        if (root == null) { return 0; }
-        //if(root.children.size() == 0)
-        //    return this.root.children.size();
-        //else
-        //System.out.print(root.children);
+        int sum = 0;
+        if(this.root.children.size() == 0)
+            sum = 1;
+        else
+        {
             for(Node child: this.root.children)
             {
-                System.out.print(child);
-                if (child.size() == 1)
-                    {leaves++;
-                    System.out.print("hi");}
+                //System.out.print(child);
+                //if (child.size() == 1)
+                //    sum++;
 
-                else
-                {
-                    Tree childtree = new Tree(child);
+                //else
+                //{
                     //System.out.print(child.children);
-                    childtree.leafCount();
-                }
+                    sum += new Tree(child).leafCount();
+                //}
             }
+        }
+            
         
-        return leaves;
+        return sum;
     }
 }

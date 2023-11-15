@@ -55,5 +55,9 @@ public class Tree
         return this.root.size();
     }
 
+    public String leafCount() {
+        return null;
+    }
+
     // Additional methods will be added in later sections.
 }
