@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Tree
 {
     private Node root;
+    private int leaves = 0;
 
     class Node
     {
@@ -66,15 +67,26 @@ public class Tree
     // Additional methods will be added in later sections.
     public int leafCount()
     {
-        int count = 0;
-        if (this.root == null) { return 0; }
-        Tree childtree = 
-        for(Node child: this.root.children)
-        {
-            if (child.children.size() == 1){
-            count++;
-            } 
-        }
-        return count;
+        if (root == null) { return 0; }
+        //if(root.children.size() == 0)
+        //    return this.root.children.size();
+        //else
+        //System.out.print(root.children);
+            for(Node child: this.root.children)
+            {
+                System.out.print(child);
+                if (child.size() == 1)
+                    {leaves++;
+                    System.out.print("hi");}
+
+                else
+                {
+                    Tree childtree = new Tree(child);
+                    //System.out.print(child.children);
+                    childtree.leafCount();
+                }
+            }
+        
+        return leaves;
     }
 }
