@@ -55,9 +55,45 @@ public class Tree
         return this.root.size();
     }
 
-    public String leafCount() {
-        return null;
+    // Additional methods will be added in later sections.
+
+    /*
+     * A visitor whose visit method is called for each visited Node 
+     * during a tree traversal.
+     */
+    public interface Visitor {
+        // The visit method is called for each visited node.
+        //@param data: the data of the node being visited
+        void visit(Object data);
+        
     }
 
-    // Additional methods will be added in later sections.
+    /*
+     * Traverse this tree in preorder
+     * @param v: the visitor to be invoked ata each node
+     */
+    public void preorder(Visitor v)
+    {
+        Tree.preorder(this.root, v);
+    }
+
+    /*
+     * Traverse the tree with a given root in preorder
+     * @param n: The root of the tree to traverse
+     * @param v: Visitor to be invoked at each 
+     */
+    private static void preorder(Node n, Visitor v)
+    {
+        if (n==null)
+            return;
+
+        v.visit(n.data);
+
+        for(Node child: n.children)
+        {
+            Tree.preorder(child, v);
+        }
+    }
+
+
 }

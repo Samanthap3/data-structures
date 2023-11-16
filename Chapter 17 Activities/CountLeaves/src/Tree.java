@@ -75,15 +75,7 @@ public class Tree
         {
             for(Node child: this.root.children)
             {
-                //System.out.print(child);
-                //if (child.size() == 1)
-                //    sum++;
-
-                //else
-                //{
-                    //System.out.print(child.children);
                     sum += new Tree(child).leafCount();
-                //}
             }
         }
             
