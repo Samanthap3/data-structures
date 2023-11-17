@@ -1,6 +1,8 @@
 import java.util.TreeMap;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.ArrayList;
 
 public class MorseCode
@@ -74,6 +76,11 @@ public class MorseCode
         /*
             !!! INSERT CODE HERE
         */
+        Map<Character, String> list = new TreeMap<>();
+        list.put(letter, code);
+
+        treeInsert(letter, code);
+
     }
 
     /**
@@ -88,6 +95,15 @@ public class MorseCode
         /*
             !!! INSERT CODE HERE
         */
+        if(codeMap.isEmpty())
+            codeMap.put(letter, code);
+        else
+        {
+            while
+        }
+
+        
+
     }
 
     /**
@@ -103,6 +119,14 @@ public class MorseCode
         /*
             !!! INSERT CODE HERE
         */
+        //String encoded = "";
+
+        Set<Character> keys = codeMap.keySet();
+
+        for(char key: keys)
+        {
+            morse.append(codeMap.get(key));
+        }
 
         return morse.toString();
     }
