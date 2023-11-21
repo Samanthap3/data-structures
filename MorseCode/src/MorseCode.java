@@ -89,13 +89,11 @@ public class MorseCode
     private static void treeInsert(char letter, String code)
     {
         
-        //TreeNode node = decodeTree;
-        //String dir = code.substring(0,1);
-        
+        TreeNode current = new TreeNode(decodeTree);
         while(code.length() > 0)
         {
             char nodey = code.charAt(0);
-            TreeNode current = new TreeNode(decodeTree);
+            
             if(nodey == DOT)
             {
                 current.setLeft(new TreeNode(letter));
@@ -123,16 +121,21 @@ public class MorseCode
         StringBuffer morse = new StringBuffer(400);
         while(text.length() > 0)
         {
-            String letter = text.substring(0, 1).toUpperCase();
-            
-            if(letter.equals(" "))
-                morse.append(" ");
-            else
-                morse.append(codeMap.get(letter));//gets morse corresponding to letter
-            
-            text = text.substring(1);
+            String word = text.substring(0, text.indexOf(" "));
+            while(word.length() > 0)
+            {
+                Character letter = text.charAt(0);
+                //text.substring(0, 1).toUpperCase();
+                
+                if(letter == ' ')
+                    morse.append(" ");
+                else
+                    morse.append(codeMap.get(letter));//gets morse corresponding to letter
+                
+                
+            }
+            text = text.substring(text.indexOf(" "));
         }
-
         return morse.toString();
     }
 
@@ -149,7 +152,7 @@ public class MorseCode
         {
             String morseWord = morse.substring(0, morse.indexOf(" "));//takes first word
             TreeNode tempNode = decodeTree;//start at the original decode node
-            morse = morse.substring(morse.indexOf(" "));//cuts out first word
+            
 
             while(morseWord.length() > 0)//decodes word
             {
@@ -162,10 +165,14 @@ public class MorseCode
                 {
                     tempNode = tempNode.getRight();
                 }
-                text.append(tempNode.getValue());     
+                else
+                    text.append(" ");
+                    
                 morseWord = morseWord.substring(1);
             }
-            text.append(" ");
+            text.append(tempNode.getValue()); 
+            morse = morse.substring(morse.indexOf(" "));//cuts out first word
+            
         }
         return text.toString();
     }
