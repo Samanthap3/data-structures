@@ -17,6 +17,8 @@ public class MorseCode
     {
         MorseCode.start();  
         System.out.println(MorseCode.encode("Watson come here"));
+        System.out.println(MorseCode.decode(MorseCode.encode("Watson come here")));
+
         BTreePrinter.printNode(decodeTree);
     }
 
@@ -74,7 +76,7 @@ public class MorseCode
     private static void addSymbol(char letter, String code)
     {
         codeMap.put(letter, code);
-
+        
         treeInsert(letter, code);
 
     }
@@ -89,24 +91,27 @@ public class MorseCode
     private static void treeInsert(char letter, String code)
     {
         
-        TreeNode current = new TreeNode(decodeTree);
+        TreeNode current = decodeTree;
         while(code.length() > 0)
         {
             char nodey = code.charAt(0);
-            
             if(nodey == DOT)
             {
-                current.setLeft(new TreeNode(letter));
+                if(current.getLeft() == null)
+                    current.setLeft(new TreeNode(' '));
                 current = current.getLeft();
             }
             else if(nodey == DASH)
             {
-                current.setRight(new TreeNode(letter));
+                if(current.getRight() == null)
+                    current.setRight(new TreeNode(' '));
                 current = current.getRight();
             }
-            code.substring(1);
+            code = code.substring(1);
             
         }
+        current.setValue(letter);            //System.out.println(decodeTree.getValue());
+
 
     }
 
@@ -119,23 +124,19 @@ public class MorseCode
     public static String encode(String text)
     {
         StringBuffer morse = new StringBuffer(400);
-        while(text.length() > 0)
-        {
-            String word = text.substring(0, text.indexOf(" "));
-            while(word.length() > 0)
+            while(text.length() > 0)
             {
-                Character letter = text.charAt(0);
-                //text.substring(0, 1).toUpperCase();
+                Character letter = text.charAt(0);//takes first letter to encode
                 
-                if(letter == ' ')
+                if(letter == ' ')//if character is a space
                     morse.append(" ");
-                else
-                    morse.append(codeMap.get(letter));//gets morse corresponding to letter
-                
-                
+                else//add morse of letter and a space
+                    morse.append(codeMap.get(Character.toUpperCase(letter)) + " ");//gets morse corresponding to letter
+            
+                text = text.substring(1);//removes already encoded letter from string
             }
-            text = text.substring(text.indexOf(" "));
-        }
+
+        morse.deleteCharAt(morse.length()-1);
         return morse.toString();
     }
 
@@ -148,16 +149,18 @@ public class MorseCode
     public static String decode(String morse)
     {
         StringBuffer text = new StringBuffer(100);
-        while(morse.length() > 0)
-        {
-            String morseWord = morse.substring(0, morse.indexOf(" "));//takes first word
-            TreeNode tempNode = decodeTree;//start at the original decode node
-            
+        int count = 0;
+        int end = morse.length();
 
-            while(morseWord.length() > 0)//decodes word
+        TreeNode tempNode = decodeTree;//start at the original decode node
+        
+        while(count < end)//counts till end of morse string
+        {
+            char dir = morse.charAt(0);
+            
+            if(dir != ' ')//decodes word
             {
-                char dir = morseWord.charAt(0);
-                if(dir ==DOT)
+                if(dir == DOT)
                 {
                     tempNode = tempNode.getLeft();
                 }
@@ -165,15 +168,28 @@ public class MorseCode
                 {
                     tempNode = tempNode.getRight();
                 }
-                else
-                    text.append(" ");
-                    
-                morseWord = morseWord.substring(1);
+               
+                
             }
-            text.append(tempNode.getValue()); 
-            morse = morse.substring(morse.indexOf(" "));//cuts out first word
+            
+            else if(morse.charAt(0) == ' ' )//adds spaces 
+            {
+                    text.append(tempNode.getValue());
+                    tempNode = decodeTree;
+                   
+                    if(morse.charAt(1) == ' ')//if there are 2 spaces in a row for actual space b/w words
+                    {
+                        text.append(" ");
+                        morse = morse.substring(1);
+                        count++;
+                    }
+
+            }
+            morse = morse.substring(1);//next char
+            count++;
             
         }
+        text.append(tempNode.getValue());//last letter
         return text.toString();
     }
 }
