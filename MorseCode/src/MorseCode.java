@@ -98,13 +98,13 @@ public class MorseCode
             if(nodey == DOT)
             {
                 if(current.getLeft() == null)
-                    current.setLeft(new TreeNode(' '));
+                    current.setLeft(new TreeNode(current.getValue()));
                 current = current.getLeft();
             }
             else if(nodey == DASH)
             {
                 if(current.getRight() == null)
-                    current.setRight(new TreeNode(' '));
+                    current.setRight(new TreeNode(current.getValue()));
                 current = current.getRight();
             }
             code = code.substring(1);
@@ -149,12 +149,10 @@ public class MorseCode
     public static String decode(String morse)
     {
         StringBuffer text = new StringBuffer(100);
-        int count = 0;
-        int end = morse.length();
 
         TreeNode tempNode = decodeTree;//start at the original decode node
         
-        while(count < end)//counts till end of morse string
+        while(!(morse.equals("")))//counts till end of morse string
         {
             char dir = morse.charAt(0);
             
@@ -168,11 +166,9 @@ public class MorseCode
                 {
                     tempNode = tempNode.getRight();
                 }
-               
-                
             }
             
-            else if(morse.charAt(0) == ' ' )//adds spaces 
+            else// if(morse.charAt(0) == ' ' ) adds spaces 
             {
                     text.append(tempNode.getValue());
                     tempNode = decodeTree;
@@ -181,13 +177,9 @@ public class MorseCode
                     {
                         text.append(" ");
                         morse = morse.substring(1);
-                        count++;
                     }
-
             }
             morse = morse.substring(1);//next char
-            count++;
-            
         }
         text.append(tempNode.getValue());//last letter
         return text.toString();
